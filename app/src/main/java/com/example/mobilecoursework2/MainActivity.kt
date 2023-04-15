@@ -1,9 +1,13 @@
 package com.example.mobilecoursework2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +20,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var testing: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        supportActionBar?.hide();
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -194,6 +204,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+        btnSearchByIngredient.setOnClickListener {
+            val searchIngredientIntent = Intent (this, SearchByIngredient::class.java)
+            startActivity(searchIngredientIntent)
         }
     }
 }
